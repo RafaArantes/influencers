@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router'
 import { TagInputModule } from 'ngx-chips';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -22,6 +23,7 @@ import { InfluencersComponent } from './influencers/influencers.component';
     BrowserModule,
     BrowserAnimationsModule,
     TagInputModule,
+    HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
       {path: '', component: DashboardComponent},

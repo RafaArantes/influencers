@@ -8,7 +8,7 @@
       <input type="number" class="filterBy" (change)="filterFunction()" *ngIf="filter == 'Follower'" [(ngModel)]="filterNumberInput">
       <div class="filterHolder">
         <p class="sortLabel">Filter by</p>
-        <select name="filter" class="sortInput" [(ngModel)]="filter">
+        <select name="filter" class="sortInput" (change)="changeFilter()" [(ngModel)]="filter">
           <option value="Follower">Followers</option>
           <option value="Keywords">Keywords</option>
           <option value="Interests">Interests</option>
@@ -16,7 +16,7 @@
       </div>
       <div class="filterHolder">
         <p class="sortLabel">Sort by</p>
-        <select name="filter" class="sortInput" (change)="filterFunction(newInfluencers)" [(ngModel)]="sort">
+        <select name="filter" class="sortInput" (change)="filterFunction()" [(ngModel)]="sort">
           <option [value]="['Followers', 'desc']">Most Followers</option>
           <option [value]="['Followers', 'asc']">Least Followers</option>
           <option [value]="['Engagement', 'desc']">Most Engagement</option>

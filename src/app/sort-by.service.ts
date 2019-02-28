@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 interface Influencer {
+  _id: string;
   username: string;
   fullName: string;
   picture: string;
