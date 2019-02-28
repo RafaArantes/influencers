@@ -5723,9 +5723,10 @@ export class InfluencersComponent implements OnInit {
 }
 ]
   newInfluencers: Influencer[]
-  filter: string;
-  filterInput: (number|(string|number)[])
-  sort: string[]
+  filter: string = "Follower"
+  filterNumberInput: number = 0
+  filterInput: (string|number)[]
+  sort: string = 'Followers,desc'
 
   constructor(
     private filterByMethod: FilterByService,
@@ -5735,14 +5736,15 @@ export class InfluencersComponent implements OnInit {
   }
 
   filterFunction(){
-    console.log(this.influencers, this.filter, this.filterInput)
-    const filterProps = this.filter == `Follower` ? this.filterInput : this.filterInput.split(' ')
+    const filterProps = this.filter == `Follower` ? this.filterNumberInput : this.filterInput ? this.filterInput.map(x => x.value) : []
     this.newInfluencers = this.sortFunction(this.filterByMethod.filterBy(this.influencers, this.filter, filterProps))
   }
-  sortFunction(influencers: Influencers[]){
-    const sortPopulator: string = this.sort.split(',')
+
+  sortFunction(influencers: Influencer[]){
+    const sortPopulator = this.sort.split(',')
     return this.sortByMethod.sortBy(influencers, sortPopulator[0], sortPopulator[1])
   }
+
   ngOnInit() {
     this.newInfluencers = this.influencers
   }

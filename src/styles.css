@@ -5,3 +5,8 @@
 body{
   background-color: #F7F8F9;
 }
+
+.filterBy .ng2-tag-input[_ngcontent-c2], .filterBy .ng2-tag-input.ng2-tag-input--focused[_ngcontent-c2]{
+  padding-top: 19px;
+  border-bottom: none ;
+}

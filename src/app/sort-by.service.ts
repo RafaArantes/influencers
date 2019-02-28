@@ -50,7 +50,6 @@ export class SortByService {
   }
 
   sortBy(array: Influencer[], sortable: string, order: string){
-    console.log(order)
     return this['sortBy'+sortable](array, order)
 
   }

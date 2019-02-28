@@ -5739,6 +5739,7 @@ export class DashboardComponent implements OnInit {
     this.influencersMostInfluent = this.filterByMethod.filterBy(this.sortByMethod.sortBy(this.influencers, 'Engagement', 'desc'), 'TopAmount', 6)
     this.influencersLeastInfluent = this.filterByMethod.filterBy(this.sortByMethod.sortBy(this.influencers, 'Engagement', 'asc'), 'TopAmount', 2)
     this.interests = _.uniq(this.influencers.flatMap((influencer: Influencer) => influencer.stats.interests))
+    console.log(this.interests)
   }
 
 }

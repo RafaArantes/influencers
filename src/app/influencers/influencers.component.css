@@ -12,6 +12,9 @@
   text-transform: uppercase;
   margin-bottom: 25px;
 }
+input, select{
+  outline: none;
+}
 .titlePainel{
   font-family: "Museo Sans Rounded 900";
   font-weight: normal;
@@ -66,7 +69,7 @@
   color: #cdcdcd;
 }
 .container{
-  width: calc(100% - 235px);
+  width: calc(100% - 500px);
   margin-left: 65px;
   float: left;
 }
@@ -81,12 +84,13 @@
 .filterBy{
   border: none;
   height: 100%;
-  width: 80%;
+  width: calc(100% - 530px);
   font-family: "Museo Sans Rounded 500";
   font-weight: normal;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 19px;
+  float: left;
   letter-spacing: 0.05em;
   text-align: left;
   padding-left: 65px;
@@ -94,6 +98,34 @@
   background-image: url(../../assets/img/search.png);
   background-repeat: no-repeat;
   background-position: 20px center;
+}
+.filterHolder{
+  height: 100%;
+  float: left;
+  width: 265px;
+}
+.sortLabel{
+  padding-top: 30px;
+  padding-right: 20px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #999;
+  border-right: solid 1px #cdcdcd;
+  font-size: 16px;
+  font-family: "Museo Sans Rounded 500";
+  height: 100%;
+  float: left;
+}
+.sortInput{
+  width: 157px;
+  height: 100%;
+  float: left;
+  padding-left: 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: "Museo Sans Rounded 500";
+  border: none;
 }
 .flexContainer{
   width: 100%;
@@ -162,7 +194,7 @@
 }
 
 .contentCardBigger{
-  width: 554px;
+  width: calc(50% - 31px);
   height: 314px;
   margin-right: 31px;
   margin-bottom: 20px;
@@ -171,4 +203,45 @@
   display: flex;
   align-items: center;
   box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.05);
+}
+
+.filterBy .ng2-tag-input{
+  border: none;
+}
+@media(max-width: 1776px){
+  .container{
+    width: calc(100% - 150px);
+  }
+}
+@media(max-width: 1420px){
+  .contentCard{
+    width: calc(50% - 31px);
+    height: 140px;
+  }
+}
+@media(max-width: 1200px){
+  .filterBar{
+    height: 100px;
+  }
+  .filterBy[_ngcontent-c1]{
+    width: 100%;
+    height: 70px;
+    border-bottom: solid 1px #efefef;
+  }
+  .filterHolder{
+    height: 30px;
+    width: 50%;
+    padding-left: 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  .sortLabel{
+    padding-top: 5px;
+  }
+}
+@media(max-width: 1010px){
+  .contentCard{
+    width: calc(100% - 31px);
+    height: 140px;
+  }
 }

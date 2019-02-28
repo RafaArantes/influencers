@@ -4,18 +4,25 @@
   <div class="container">
     <h2 class="titlePainel">Influencers</h2>
     <div class="filterBar">
-      <input type="text" class="filterBy" [(ngModel)]="filterInput" (change)="filterFunction()">
-      <select name="filter" id="" [(ngModel)]="filter">
-        <option value="Follower">Followers</option>
-        <option value="Keywords">Keywords</option>
-        <option value="Interests">Interests</option>
-      </select>
-      <select name="filter" id="" (change)="sortFunction(newInfluencers)" [(ngModel)]="sort">
-        <option [value]="['Followers', 'desc']">Most Followers</option>
-        <option [value]="['Followers', 'asc']">Least Followers</option>
-        <option [value]="['Engagement', 'desc']">Most Engagement</option>
-        <option [value]="['Engagement', 'asc']">Least Engagement</option>
-      </select>
+      <tag-input class="filterBy" (onAdd)="filterFunction()" (onRemove)="filterFunction()" *ngIf="filter != 'Follower'" [(ngModel)]="filterInput"></tag-input>
+      <input type="number" class="filterBy" (change)="filterFunction()" *ngIf="filter == 'Follower'" [(ngModel)]="filterNumberInput">
+      <div class="filterHolder">
+        <p class="sortLabel">Filter by</p>
+        <select name="filter" class="sortInput" [(ngModel)]="filter">
+          <option value="Follower">Followers</option>
+          <option value="Keywords">Keywords</option>
+          <option value="Interests">Interests</option>
+        </select>
+      </div>
+      <div class="filterHolder">
+        <p class="sortLabel">Sort by</p>
+        <select name="filter" class="sortInput" (change)="filterFunction(newInfluencers)" [(ngModel)]="sort">
+          <option [value]="['Followers', 'desc']">Most Followers</option>
+          <option [value]="['Followers', 'asc']">Least Followers</option>
+          <option [value]="['Engagement', 'desc']">Most Engagement</option>
+          <option [value]="['Engagement', 'asc']">Least Engagement</option>
+        </select>
+      </div>
     </div>
     <p class="titleLabel">Search Results:</p>
     <div class="flexContainer">
