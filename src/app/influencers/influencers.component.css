@@ -14,6 +14,7 @@
 }
 input, select{
   outline: none;
+  background-color: #fff;
 }
 .titlePainel{
   font-family: "Museo Sans Rounded 900";
@@ -69,7 +70,7 @@ input, select{
   color: #cdcdcd;
 }
 .container{
-  width: calc(100% - 500px);
+  width: calc(100% - 130px);
   margin-left: 65px;
   float: left;
 }
@@ -241,7 +242,8 @@ input, select{
 }
 @media(max-width: 1010px){
   .contentCard{
-    width: calc(100% - 31px);
+    width: 100%;
+    margin-right: 0;
     height: 140px;
   }
 }

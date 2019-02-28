@@ -29,7 +29,6 @@ export class FilterByService {
   constructor() { }
 
   filterByKeywords(influencers: Influencer[], filterArray: (string)[]){
-    console.log(filterArray)
     if(!filterArray[0]) return influencers
     return influencers.filter((influencer: Influencer) => filterArray.filter(filter => influencer.biography.includes(filter))[0] ? true : false)
   }
@@ -39,7 +38,6 @@ export class FilterByService {
   }
 
   filterByInterests(influencers: Influencer[], filterArray: (string)[]){
-    console.log(filterArray)
     if(!filterArray[0]) return influencers
     return influencers.filter((influencer: Influencer) => {
       return filterArray.filter((filterString: string) => {

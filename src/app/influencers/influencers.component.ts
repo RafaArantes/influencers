@@ -19,7 +19,10 @@ interface Engagement {
   avgCommentsRatio: number;
   avgLikesRatio: number;
 }
-
+interface Tags {
+  display: number|string;
+  value: number|string;
+}
 @Component({
   selector: 'app-influencers',
   templateUrl: './influencers.component.html',
@@ -5724,8 +5727,13 @@ export class InfluencersComponent implements OnInit {
 ]
   newInfluencers: Influencer[]
   filter: string = "Follower"
+  maxShowdElements: number = 10
   filterNumberInput: number = 0
-  filterInput: (string|number)[]
+  scroll = (): void => {
+    this.maxShowdElements = document.documentElement.scrollTop + document.documentElement.clientHeight == document.documentElement.scrollHeight ? this.maxShowdElements + 10 : this.maxShowdElements
+    this.filterFunction()
+  }
+  filterInput: Tags[]
   sort: string = 'Followers,desc'
 
   constructor(
@@ -5737,16 +5745,16 @@ export class InfluencersComponent implements OnInit {
 
   filterFunction(){
     const filterProps = this.filter == `Follower` ? this.filterNumberInput : this.filterInput ? this.filterInput.map(x => x.value) : []
-    this.newInfluencers = this.sortFunction(this.filterByMethod.filterBy(this.influencers, this.filter, filterProps))
+    this.newInfluencers = this.sortFunction(this.filterByMethod.filterBy(this.influencers, this.filter, filterProps)).slice(0, this.maxShowdElements)
   }
-
   sortFunction(influencers: Influencer[]){
     const sortPopulator = this.sort.split(',')
     return this.sortByMethod.sortBy(influencers, sortPopulator[0], sortPopulator[1])
   }
 
   ngOnInit() {
-    this.newInfluencers = this.influencers
+    window.addEventListener('scroll', this.scroll, true);
+    this.newInfluencers = this.influencers.slice(0, this.maxShowdElements)
   }
 
 }
