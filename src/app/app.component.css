@@ -1,0 +1,40 @@
+.lateralMenu{
+  float: left;
+  width: 90px;
+  height: 100vh;
+  position: fixed;
+  box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.05);
+  background-color: #fff;
+}
+.logo{
+  width: 90px;
+  box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.05);
+  height: 90px;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: 40%;
+  background-size: 40%;
+  background-image: url('../assets/img/logo.jpg');
+}
+.dashboard{
+
+}
+.lateral-menu li{
+  width: 70px;
+  height: 70px;
+  margin: 10px auto;
+}
+.dashboard{
+  -webkit-background-size: 50%;
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../assets/img/dashboard.png');
+}
+.influencers{
+  -webkit-background-size: 50%;
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../assets/img/influencers.png');
+}

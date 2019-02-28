@@ -1,0 +1,38 @@
+
+
+<div class="dashboard-page">
+  <div class="container">
+    <h2 class="titlePainel">Welcome to affable!</h2>
+    <p class="titleLabel">Top 6 Influential Personalities</p>
+    <div class="flexContainer">
+      <div class="contentCard" *ngFor="let influencer of influencersMostInfluent">
+        <div [ngStyle]="{'background-image' : 'url('+influencer.picture+')'}" class="avatar"></div>
+        <div>
+          <p class="name">@{{influencer.username}}</p>
+          <h3 class="followers">{{influencer.followerCount}}<p style="color: #bcbcbc; font-size: 12px; font-family: 'Museo Sans Rounded 300'; text-align: right">followers</p></h3>
+        </div>
+      </div>
+    </div>
+    <p class="seeMore">See all influencers</p>
+
+    <p class="titleLabel">Two least Influential Personalities</p>
+    <div class="flexContainer">
+      <div class="contentCardBigger" *ngFor="let influencer of influencersLeastInfluent">
+        <div [ngStyle]="{'background-image' : 'url('+influencer.picture+')'}" class="biggerAvatar"></div>
+        <div>
+          <p class="nameBigger">@{{influencer.username}}</p>
+          <h3 class="followersBigger">{{((influencer.stats.engagement.avgLikesRatio + influencer.stats.engagement.avgCommentsRatio) * influencer.followerCount).toFixed()}}<p style="color: #bcbcbc; font-size: 12px; font-family: 'Museo Sans Rounded 300'; text-align: right">Average likes/comments</p></h3>
+        </div>
+      </div>
+    </div>
+    <p class="seeMore">See all influencers</p>
+  </div>
+
+  <div style="float: left; margin-top: 165px">
+    <p class="titleLabel">Top 10 Most Followed</p>
+    <div class="ranking" *ngFor="let influencer of influencersTopTen">
+      <p class="name">@{{influencer.username}}<span style="display: block; font-size: 11px; color: #cdcdcd">{{influencer.fullName}}</span></p>
+      <h3 class="followers">{{influencer.followerCount}}<p style="color: #bcbcbc; font-size: 12px; font-family: 'Museo Sans Rounded 300'; text-align: right">followers</p></h3>
+    </div>
+  </div>
+</div>

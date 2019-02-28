@@ -1,0 +1,31 @@
+
+
+<div class="dashboard-page">
+  <div class="container">
+    <h2 class="titlePainel">Influencers</h2>
+    <div class="filterBar">
+      <input type="text" class="filterBy" [(ngModel)]="filterInput" (change)="filterFunction()">
+      <select name="filter" id="" [(ngModel)]="filter">
+        <option value="Follower">Followers</option>
+        <option value="Keywords">Keywords</option>
+        <option value="Interests">Interests</option>
+      </select>
+      <select name="filter" id="" (change)="sortFunction(newInfluencers)" [(ngModel)]="sort">
+        <option [value]="['Followers', 'desc']">Most Followers</option>
+        <option [value]="['Followers', 'asc']">Least Followers</option>
+        <option [value]="['Engagement', 'desc']">Most Engagement</option>
+        <option [value]="['Engagement', 'asc']">Least Engagement</option>
+      </select>
+    </div>
+    <p class="titleLabel">Search Results:</p>
+    <div class="flexContainer">
+      <div class="contentCard" *ngFor="let influencer of newInfluencers">
+        <div [ngStyle]="{'background-image' : 'url('+influencer.picture+')'}" class="avatar"></div>
+        <div>
+          <p class="name">@{{influencer.username}}</p>
+          <h3 class="followers">{{influencer.followerCount}}<p style="color: #bcbcbc; font-size: 12px; font-family: 'Museo Sans Rounded 300'; text-align: right">followers</p></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
