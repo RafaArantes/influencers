@@ -34,12 +34,18 @@ interface ServerResponse {
 })
 export class DashboardComponent implements OnInit {
 
+  //Influencers base array. Should be set on ngInit and shouldn't be changed.
   influencers: Influencer[]
+
+  //Influencers top ten variable. It's sorted by number of followers and it's filtered by the first ten results.
   influencersTopTen: Influencer[] = []
+
+  //Most influent variable. Should be sorted by influency levels from most to least. Can be filtered by any of the filter methods
   influencersMostInfluent: Influencer[] = []
+
+  //Least influent variable. Should be sorted by influency levels from least to most. Can be filtered by any of the filter methods
   influencersLeastInfluent: Influencer[] = []
-  interests: (string|number)[]
-  
+
   constructor(
     private filterByMethod: FilterByService,
     private sortByMethod: SortByService,
@@ -49,12 +55,16 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Makes a http request and asigns the value returned to the "sortBy" method in the "SortByMethod" service, which sorts and returns a array of influencers that will be assigned to
+    // the "influencers" variable. After that, the "influencersTopTen" variable uses the "influencers" variable array and filters it with the "TopAmount" method in the "filterByMethod" service.
+    // The "influencersMostInfluent" receives the "influencers" variable value, sorts it by "Engagement" from the most to least influent, and after that is filtered by the top 6 most influent.
+    // The "influencersLeastInfluent" receives the "influencers" variable value, sorts it by "Engagement" from the least to most influent, and after that is filtered by the top 2 most influent.
+
     this.http.get('http://localhost:8080/influencers').subscribe((x: ServerResponse) => {
-      this.influencers = x.records
+      this.influencers = this.sortByMethod.sortBy(x.records, 'Followers', 'desc')
       this.influencersTopTen = this.filterByMethod.filterBy(this.influencers, 'TopAmount', 10)
       this.influencersMostInfluent = this.filterByMethod.filterBy(this.sortByMethod.sortBy(this.influencers, 'Engagement', 'desc'), 'TopAmount', 6)
       this.influencersLeastInfluent = this.filterByMethod.filterBy(this.sortByMethod.sortBy(this.influencers, 'Engagement', 'asc'), 'TopAmount', 2)
-      this.interests = _.uniq(this.influencers.flatMap((influencer: Influencer) => influencer.stats.interests))
     })
   }
 

@@ -4,7 +4,7 @@
   <div class="container">
     <h2 class="titlePainel">Influencers</h2>
     <div class="filterBar">
-      <tag-input class="filterBy" (onAdd)="filterFunction()" (onRemove)="filterFunction()" *ngIf="filter != 'Follower'" [(ngModel)]="filterInput"></tag-input>
+      <tag-input placeholder="Enter more tags!" secondaryPlaceholder ="Enter a tag to filter!" class="filterBy" (onAdd)="filterFunction()" (onRemove)="filterFunction()" *ngIf="filter != 'Follower'" [(ngModel)]="filterInput"></tag-input>
       <input type="number" class="filterBy" (change)="filterFunction()" *ngIf="filter == 'Follower'" [(ngModel)]="filterNumberInput">
       <div class="filterHolder">
         <p class="sortLabel">Filter by</p>
