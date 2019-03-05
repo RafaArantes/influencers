@@ -2,8 +2,8 @@
 <div class="lateralMenu">
   <div class="logo"></div>
   <ul style="list-style: none" class="lateral-menu">
-    <li routerLink="" class="dashboard"></li>
-    <li routerLink="/influencers" class="influencers"></li>
+    <li (click)="changeRoute('/')" class="dashboard" [ngClass]="{'dashboardActive' : route == '/', 'dashboard' : route != '/'}"></li>
+    <li (click)="changeRoute('/influencers')" [ngClass]="{'influencersActive' : route == '/influencers', 'influencers' : route != '/influencers'}"></li>
   </ul>
 </div>
 <router-outlet></router-outlet>

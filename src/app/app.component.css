@@ -25,12 +25,12 @@
   height: 70px;
   margin: 10px auto;
 }
-.dashboard{
+.dashboardActive{
   -webkit-background-size: 50%;
   background-size: 50%;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url('../assets/img/dashboard.png');
+  background-image: url('../assets/img/dashboardactive.png');
 }
 .influencers{
   -webkit-background-size: 50%;
@@ -38,4 +38,18 @@
   background-position: center;
   background-repeat: no-repeat;
   background-image: url('../assets/img/influencers.png');
+}
+.dashboard{
+  -webkit-background-size: 50%;
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../assets/img/dashboard.png');
+}
+.influencersActive{
+  -webkit-background-size: 50%;
+  background-size: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url('../assets/img/influencersactive.png');
 }

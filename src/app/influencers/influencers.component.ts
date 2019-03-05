@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SortByService } from '../sort-by.service'
-import { FilterByService } from '../filter-by.service'
+import { SortByService } from '../services/sort-by.service'
+import { FilterByService } from '../services/filter-by.service'
+import { IdGeneratorService } from '../services/id-generator.service'
 import { HttpClient } from '@angular/common/http';
 
 interface Influencer {
@@ -56,7 +57,7 @@ export class InfluencersComponent implements OnInit {
 
   influencers: Influencer[]
   newInfluencers: Influencer[]
-  filter: string = "Follower"
+  filter: string = "follower"
   maxShowdElements: number = 10
   filterNumberMin: number
   filterNumberMax: number
@@ -68,6 +69,7 @@ export class InfluencersComponent implements OnInit {
   constructor(
     private filterByMethod: FilterByService,
     private sortByMethod: SortByService,
+    private idGenerator: IdGeneratorService,
     private http: HttpClient
   ) {}
 
@@ -77,10 +79,12 @@ export class InfluencersComponent implements OnInit {
     this.filterNumberMin = undefined
   }
 
+
+
   handleFilterAdd(){
-    if(this.filter == "Follower") {
+    if(this.filter == "follower") {
       (this.filterNumberMin || this.filterNumberMax) && this.filters.push({
-        id: Number((Math.random() * 10000000000).toFixed()),
+        id: this.idGenerator.generateId(),
         type: this.filter,
         min: this.filterNumberMin ? this.filterNumberMin : 0,
         max: this.filterNumberMax ? this.filterNumberMax : Infinity
@@ -88,7 +92,7 @@ export class InfluencersComponent implements OnInit {
     } else {
       this.filterInput &&
         this.filters.push({
-          id: Number((Math.random() * 10000000000).toFixed()),
+          id: this.idGenerator.generateId(),
           type: this.filter,
           tags: this.filterInput
         })
@@ -110,6 +114,7 @@ export class InfluencersComponent implements OnInit {
 
   repopulateInfluencers(){
     this.filters.length > 0 && this.filters.forEach((filter, index) => {
+      console.log(this.filterFunction(this.influencers, filter))
       if(index == 0) this.newInfluencers = this.sortFunction(this.filterFunction(this.influencers, filter))
       else this.newInfluencers = this.sortFunction(this.filterFunction(this.newInfluencers, filter))
     })
@@ -118,7 +123,7 @@ export class InfluencersComponent implements OnInit {
   }
 
   filterFunction(influencers, filterProps){
-    return filterProps.type == "Follower" ? this.sortFunction(this.filterByMethod.filterBy(influencers, filterProps.type, [filterProps.min, filterProps.max])) : this.sortFunction(this.filterByMethod.filterBy(influencers, filterProps.type, filterProps.tags.map(tag => tag.value)))
+    return filterProps.type == "follower" ? this.sortFunction(this.filterByMethod.filterBy(influencers, filterProps.type, [filterProps.min, filterProps.max])) : this.sortFunction(this.filterByMethod.filterBy(influencers, filterProps.type, filterProps.tags.map(tag => tag.value)))
   }
 
   sortFunction(influencers: Influencer[]){

@@ -70,7 +70,13 @@ export class FilterByService {
     //Receives three arguments, the first being the array of influencers, second being the string method to filter by and the third being the properties which will filter the influencers array.
     //Then, uses the "filterMethod" string to choose the method used to filter the array of influencers and after that, it set's the array of influencers and the
     //properties passed in the second argument as arguments of the defined method. After that, it get's the return from the "filterMethod" method and returns the value to the function that executed this method.
-    return this['filterBy'+filterMethod](influencers, filterProp)
+    const filters = {
+      follower: this.filterByFollower,
+      keywords: this.filterByKeywords,
+      interests: this.filterByInterests,
+      top_amount: this.filterByTopAmount
+    }
+    return filters[filterMethod](influencers, filterProp)
   }
 
   filterByTopAmount(influencers: Influencer[], filterProp: number){
