@@ -45,9 +45,9 @@ export class FilterByService {
     })
   }
 
-  filterByFollower(influencers: Influencer[], filterProp: number){
+  filterByFollower(influencers: Influencer[], filterProp: number[]){
     //Filters the "influencers" to check if the number of followers of the influencer is bigger than the "filterProp" number and returns the filtered array
-    return influencers.filter((influencer: Influencer) => filterProp <= influencer.followerCount)
+    return influencers.filter((influencer: Influencer) => filterProp[0] <= influencer.followerCount && filterProp[1] >= influencer.followerCount)
   }
 
   filterByInterests(influencers: Influencer[], filterArray: (string)[]){

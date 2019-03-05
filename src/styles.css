@@ -1,3 +1,65 @@
+@font-face {
+  font-family: "Museo Sans Rounded 100";
+  src: url(/assets/fonts/MuseoSansRounded-100.otf);
+  font-weight: 100;
+}
+@font-face {
+ font-family: "Museo Sans Rounded 300";
+ src: url(/assets/fonts/MuseoSansRounded-300.otf);
+ font-weight: 300;
+}
+@font-face {
+  font-family: "Museo Sans Rounded 500";
+  src: url(/assets/fonts/MuseoSansRounded-500.otf);
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Museo Sans Rounded 700";
+  src: url(/assets/fonts/MuseoSansRounded-700.otf);
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Museo Sans Rounded 900";
+  src: url(/assets/fonts/MuseoSansRounded-900.otf);
+  font-weight: 900;
+}
+@font-face {
+  font-family: "Museo Sans Rounded 1000";
+  src: url(/assets/fonts/MuseoSansRounded-1000.otf);
+  font-weight: 1000;
+}
+.tt{
+  text-transform: uppercase;
+}
+.tac{
+  text-align: center;
+}
+.font1{
+  font-family: "MuseoSans" !important;
+}
+
+.font2{
+  font-family: "MuseoSansRounded" !important;
+}
+.fw100{
+  font-weight: 100 !important;
+}
+.fw300{
+  font-weight: 300 !important;
+}
+.fw500{
+  font-weight: 500 !important;
+}
+.fw700{
+  font-weight: 700 !important;
+}
+.fw900{
+  font-weight: 900 !important;
+}
+.fw1000{
+  font-weight: 1000 !important;
+}
+
 *{
   margin: 0;
   padding: 0;

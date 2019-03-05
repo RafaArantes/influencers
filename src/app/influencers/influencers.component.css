@@ -74,10 +74,24 @@ input, select{
   margin-left: 65px;
   float: left;
 }
+.applyFilter{
+  height: 76.21px;
+  width: 85px;
+  margin-left: 20px;
+  border-radius: 5px;
+  -webkit-background-size: 27px;
+  background-size: 27px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(../../assets/img/search2.png);
+  border: none;
+  background-color: #00b7c5;
+}
 .filterBar{
-  width: 100%;
+  width: calc(100% - 105px);
   height: 76.21px;
   border-radius: 5px;
+  float: left;
   margin-bottom: 40px;
   background: #fff;
   box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.05);
@@ -85,7 +99,7 @@ input, select{
 .filterBy{
   border: none;
   height: 100%;
-  width: calc(100% - 530px);
+  width: calc(100% - 265px);
   font-family: "Museo Sans Rounded 500";
   font-weight: normal;
   -webkit-box-sizing: border-box;
@@ -100,6 +114,58 @@ input, select{
   background-repeat: no-repeat;
   background-position: 20px center;
 }
+.filterHalf{
+  border: none;
+  height: 100%;
+  width: calc(50% - 132.5px);
+  font-family: "Museo Sans Rounded 500";
+  font-weight: normal;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 19px;
+  float: left;
+  letter-spacing: 0.05em;
+  text-align: left;
+  padding-left: 25px;
+  color: #bcbcbc;
+  background-repeat: no-repeat;
+  background-position: 20px center;
+}
+.filterHalf:nth-child(1){
+  border-right: solid 1px #dedede;
+}
+.tags{
+  padding: 5px 10px;
+  color: #fff;
+  min-width: 120px;
+  float: left;
+  margin: 0 10px 10px 0;
+  position: relative;
+  font-family: "Museo Sans Rounded 500";
+  border-radius: 15px;
+  font-size: 14px;
+  background-color: #00b7c5;
+}
+.close-btn{
+  position: absolute;
+  right: -27px;
+  top: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: right 0.2s ease, opacity 0.2s ease;
+}
+.tags:hover .close-btn{
+  pointer-events: all;
+  opacity: 1;
+  cursor: pointer;
+  background-image: url(../../assets/img/cancelicon.png);
+  width: 27px;
+  height: 27px;
+  right: 0px;
+  top: 0px;
+  background-position: center;
+  background-size: 24px;
+}
 .filterHolder{
   height: 100%;
   float: left;
@@ -111,15 +177,24 @@ input, select{
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   color: #999;
-  border-right: solid 1px #cdcdcd;
+  border-right: solid 1px #dedede;
   font-size: 16px;
   font-family: "Museo Sans Rounded 500";
   height: 100%;
   float: left;
 }
 .sortInput{
+  background-color: transparent;
+  border: none;
+  width: 135px;
+  font-family: "Museo Sans Rounded 500";
+  color: #ababab;
+  float: right;
+}
+.filterInput{
   width: 157px;
   height: 100%;
+  color: #bcbcbc;
   float: left;
   padding-left: 10px;
   -webkit-box-sizing: border-box;
@@ -127,6 +202,17 @@ input, select{
   font-size: 14px;
   font-family: "Museo Sans Rounded 500";
   border: none;
+}
+.titleHolder{
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.sectionTitle{
+  width: calc(100% - 135px);
+  color: #ababab;
+  font-family: "Museo Sans Rounded 500";
+  float: left;
 }
 .flexContainer{
   width: 100%;
@@ -229,12 +315,17 @@ input, select{
     height: 70px;
     border-bottom: solid 1px #efefef;
   }
-  .filterHolder{
-    height: 30px;
+  .filterHalf{
     width: 50%;
-    padding-left: 20px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    height: 69px;
+    border-bottom: solid 1px #efefef;
+  }
+  .filterHolder[_ngcontent-c1] {
+      height: 30px;
+      border-top: solid 1px #efefef;
+      width: 100%;
+      padding-left: 20px;
+      /* box-sizing: border-box; */
   }
   .sortLabel{
     padding-top: 5px;

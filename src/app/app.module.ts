@@ -9,14 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MenubarComponent } from './menubar/menubar.component';
 import { InfluencersComponent } from './influencers/influencers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    MenubarComponent,
     InfluencersComponent,
   ],
   imports: [

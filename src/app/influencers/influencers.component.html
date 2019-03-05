@@ -3,28 +3,35 @@
 <div class="dashboard-page" (scroll)="onScroll()">
   <div class="container">
     <h2 class="titlePainel">Influencers</h2>
-    <div class="filterBar">
-      <tag-input placeholder="Enter more tags!" secondaryPlaceholder ="Enter a tag to filter!" class="filterBy" (onAdd)="filterFunction()" (onRemove)="filterFunction()" *ngIf="filter != 'Follower'" [(ngModel)]="filterInput"></tag-input>
-      <input type="number" class="filterBy" (change)="filterFunction()" *ngIf="filter == 'Follower'" [(ngModel)]="filterNumberInput">
-      <div class="filterHolder">
-        <p class="sortLabel">Filter by</p>
-        <select name="filter" class="sortInput" (change)="changeFilter()" [(ngModel)]="filter">
-          <option value="Follower">Followers</option>
-          <option value="Keywords">Keywords</option>
-          <option value="Interests">Interests</option>
-        </select>
+    <div class="filterBarContainer">
+      <div class="filterBar">
+        <tag-input placeholder="Enter more tags!" secondaryPlaceholder ="Enter a tag to filter!" class="filterBy" *ngIf="filter != 'Follower'" [(ngModel)]="filterInput"></tag-input>
+        <input type="number" class="filterHalf" *ngIf="filter == 'Follower'" placeholder="Min" [(ngModel)]="filterNumberMin">
+        <input type="number" class="filterHalf" *ngIf="filter == 'Follower'" placeholder="Max" [(ngModel)]="filterNumberMax">
+        <div class="filterHolder">
+          <p class="sortLabel">Filter by</p>
+          <select name="filter" class="filterInput" [(ngModel)]="filter"> 
+            <option value="Follower">Followers</option>
+            <option value="Keywords">Keywords</option>
+            <option value="Interests">Interests</option>
+          </select>
+        </div>
       </div>
-      <div class="filterHolder">
-        <p class="sortLabel">Sort by</p>
-        <select name="filter" class="sortInput" (change)="filterFunction()" [(ngModel)]="sort">
+      <button class="applyFilter" (click)="applyFilters(filters)"></button>
+    </div>
+    <div class="tags" (click)="removeFilter(tag.id)" *ngFor="let tag of filters">{{tag.type}}
+      <div class="close-btn"></div>
+    </div>
+    <div class="titleHolder">
+      <p class="sectionTitle">Search Results:</p>
+        <select name="filter" class="sortInput" (change)="repopulateInfluencers()" [(ngModel)]="sort">
           <option [value]="['Followers', 'desc']">Most Followers</option>
           <option [value]="['Followers', 'asc']">Least Followers</option>
           <option [value]="['Engagement', 'desc']">Most Engagement</option>
           <option [value]="['Engagement', 'asc']">Least Engagement</option>
         </select>
-      </div>
     </div>
-    <p class="titleLabel">Search Results:</p>
+
     <div class="flexContainer">
       <div class="contentCard" *ngFor="let influencer of newInfluencers">
         <div [ngStyle]="{'background-image' : 'url('+influencer.picture+')'}" class="avatar"></div>

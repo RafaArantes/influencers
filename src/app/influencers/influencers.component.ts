@@ -29,6 +29,23 @@ interface ServerResponse {
   code: number;
   records: Influencer[];
 }
+interface Range {
+  type: string;
+  min: number;
+  max: number;
+}
+interface Range {
+  id: number;
+  type: string;
+  min: number;
+  max: number;
+}
+
+interface Difference {
+  id: number;
+  type: string
+  tags: Tags[]
+}
 
 @Component({
   selector: 'app-influencers',
@@ -41,8 +58,11 @@ export class InfluencersComponent implements OnInit {
   newInfluencers: Influencer[]
   filter: string = "Follower"
   maxShowdElements: number = 10
-  filterNumberInput: number = 0
+  filterNumberMin: number
+  filterNumberMax: number
   filterInput: Tags[]
+  recursiveNumber: number = 0
+  filters: (Range|Difference)[] = []
   sort: string = 'Followers,desc'
 
   constructor(
@@ -51,48 +71,69 @@ export class InfluencersComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  changeFilter(){
-    //This function handles the change of the filter select in the influencers page.
-    //It clears all post filtered parameters and sets them to initial state.
-    //After that it executes the "filterFunction" again, to repopulate all influencers without the influence of any filters
-
-    this.filterInput = []
-    this.filterNumberInput = 0
-    this.filterFunction()
+  clearFilters(){
+    this.filterInput = undefined
+    this.filterNumberMax = undefined
+    this.filterNumberMin = undefined
   }
 
-  filterFunction(){
-    //filterProps checks if the kind of filter, and receives two kinds of arguments, one for "Followers" and other for the rest.
-    //After that, the "filterProps" are passed to "filterByMethod" service, that has the "filterBy" method, which filters and returns the
-    //influencers object filtered. Then, those filtered influencers are sorted via "sortFunction" and the value returned from it is setted in newInfluencers variable.
+  handleFilterAdd(){
+    if(this.filter == "Follower") {
+      (this.filterNumberMin || this.filterNumberMax) && this.filters.push({
+        id: Number((Math.random() * 10000000000).toFixed()),
+        type: this.filter,
+        min: this.filterNumberMin ? this.filterNumberMin : 0,
+        max: this.filterNumberMax ? this.filterNumberMax : Infinity
+      })
+    } else {
+      this.filterInput &&
+        this.filters.push({
+          id: Number((Math.random() * 10000000000).toFixed()),
+          type: this.filter,
+          tags: this.filterInput
+        })
+    }
+  }
 
-    const filterProps = this.filter == `Follower` ? this.filterNumberInput : this.filterInput ? this.filterInput.map(x => x.value) : []
+  removeFilter(id){
+    this.filters = this.filters.filter(filter => filter.id != id)
+    this.clearFilters()
+    this.repopulateInfluencers()
+  }
 
-    this.newInfluencers = this.sortFunction(
-        this.filterByMethod.filterBy(this.influencers, this.filter, filterProps)
-      ).slice(0, this.maxShowdElements)
+  applyFilters(filters){
+    const hasFilter = filters.find(filter => filter.type == this.filter)
+    if(hasFilter) this.filters = filters.filter(filter => filter.id != hasFilter.id)
+    this.handleFilterAdd()
+    this.repopulateInfluencers()
+  }
+
+  repopulateInfluencers(){
+    this.filters.length > 0 && this.filters.forEach((filter, index) => {
+      if(index == 0) this.newInfluencers = this.sortFunction(this.filterFunction(this.influencers, filter))
+      else this.newInfluencers = this.sortFunction(this.filterFunction(this.newInfluencers, filter))
+    })
+
+    if(this.filters.length == 0) this.newInfluencers = this.sortFunction(this.influencers).slice(0, this.maxShowdElements)
+  }
+
+  filterFunction(influencers, filterProps){
+    return filterProps.type == "Follower" ? this.sortFunction(this.filterByMethod.filterBy(influencers, filterProps.type, [filterProps.min, filterProps.max])) : this.sortFunction(this.filterByMethod.filterBy(influencers, filterProps.type, filterProps.tags.map(tag => tag.value)))
   }
 
   sortFunction(influencers: Influencer[]){
-    //sortPopulator receives a string from the filter select via ngModel separeated by a "," and splits it into two strings in a array.
-    //First string means the sort method it uses, the secondary string means in the array means the order.
-    //After that, both are sent to "SortByMethod" service, that have a method inside it called "sortBy", that takes care of the sorting and return
-    //the array of influences sorted by the "sortPopulator" parameters.
 
     const sortPopulator: string[] = this.sort.split(',')
-
     return this.sortByMethod.sortBy(influencers, sortPopulator[0], sortPopulator[1])
   }
 
   scrollHandler(){
-    // maxShowdElements is a variable that takes care of how much elements are showd on page.
-    // if the scroll reaches the bottom of the page, it increases the number of elements by 10
-    // after it, the "filterFunction" is executed again to repopulate the page with the number of elements set in the maxShowdElements variable.
 
     this.maxShowdElements = document.documentElement.scrollTop + document.documentElement.clientHeight == document.documentElement.scrollHeight ?
                               this.maxShowdElements + 10 :
                               this.maxShowdElements
-    this.filterFunction()
+
+    this.repopulateInfluencers()
   }
 
   ngOnInit() {
